@@ -47,21 +47,16 @@ pipeline {
         }
     }
     post {
-    success {
-        emailext body: """
-            <h2>Build Status: ${currentBuild.result}</h2>
-            <p><strong>Build #:</strong> ${currentBuild.number}</p>
-            <p><strong>Build Result:</strong> ${currentBuild.currentResult}</p>
-            <p>Check the <a href="${BUILD_URL}">build console output</a> for more details.</p>
-        """,
-        subject: "Lab9 - Build # ${currentBuild.number} - ${currentBuild.currentResult}",
-        to: 'abey2102@gmail.com',  // Use your email address
-        replyTo: '$DEFAULT_REPLYTO',
-        recipientProviders: [
-            [$class: 'CulpritsRecipientProvider'],
-            [$class: 'DevelopersRecipientProvider'],
-            [$class: 'RequesterRecipientProvider']
-        ]
+	always {
+		emailext body: '$DEFAULT_CONTENT', 
+		recipientProviders: [
+		    [$class: 'CulpritsRecipientProvider'],
+		    [$class: 'DevelopersRecipientProvider'],
+		    [$class: 'RequesterRecipientProvider']
+		], 
+		replyTo: '$DEFAULT_REPLYTO', 
+		subject: '$DEFAULT_SUBJECT',
+		to: '$DEFAULT_RECIPIENTS'
+	}
     }
 }
-
