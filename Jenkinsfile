@@ -46,6 +46,7 @@ pipeline {
             }
         }
     }
+
     post {
 	always {
 		emailext body: '$DEFAULT_CONTENT', 
