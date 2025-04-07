@@ -50,7 +50,7 @@ def verify_ping():
     router = driver('198.51.100.12', 'lab', 'lab123')  # Router 2's management IP
 
     router.open()
-    ping_response = router.ping('198.51.100.15')  # Router 5's loopback IP
+    ping_response = router.ping('10.1.5.1')  # Router 5's loopback IP
     router.close()
 
     return isinstance(ping_response, dict)
